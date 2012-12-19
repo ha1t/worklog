@@ -12,7 +12,7 @@ def capture():
     global now
     filename = '%s%02d%02d_%08d.png' % (now.year, now.month, now.day, counter)
     outpath = os.path.join(outdir, filename)
-    subprocess.call(['screencapture', outpath])
+    subprocess.call(['screencapture', '-x', '-C', outpath])
     counter += 1
 
 while True:
