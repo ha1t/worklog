@@ -1,13 +1,10 @@
 
-
 IMAGE_DIR := ./screencapture
 FFMPEG := ffmpeg
-
+DATE := $(shell date +'%Y%m%d')
 # TARGETS := $(wildcard ./screencapture/*.png)
 
 all:
-	$(FFMPEG) -y -f image2 -r 10 -i "$(IMAGE_DIR)/%08d.png" -s 720x450 "worklog_$(shell date +'%Y%m%d').mp4"
+	$(FFMPEG) -r 10 -i "$(IMAGE_DIR)/$(DATE)_%05d.png" -pix_fmt yuv420p -vcodec h264 -s 1120x700 -y "worklog_$(DATE).mp4"
 clean:
 	rm $(IMAGE_DIR)/*.png
-renumber:
-	php renumber.php
