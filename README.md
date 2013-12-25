@@ -12,5 +12,9 @@ $ brew install ffmpeg
 
 ```
 $ pyrhon worklog.py
-$ make
+```
+
+```
+$ make DATE=20131220 IMAGE_DIR=../../screencapture/
+$ make clean DATE=20131220 IMAGE_DIR=../../screencapture/
 ```
