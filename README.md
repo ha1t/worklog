@@ -18,3 +18,7 @@ $ pyrhon worklog.py
 $ make DATE=20131220 IMAGE_DIR=../../screencapture/
 $ make clean DATE=20131220 IMAGE_DIR=../../screencapture/
 ```
+
+# TODO
+- マシンがフリーズして再起動したときに自動的にスクリプトが再実行されてほしい(crontab?)
+- 二重起動防止したい
