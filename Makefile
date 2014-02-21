@@ -4,7 +4,7 @@ FFMPEG := ffmpeg
 DATE := $(shell date +'%Y%m%d')
 
 all:
-	/usr/bin/php renumber.php $(IMAGE_DIR) $(DATE)
+	/usr/bin/python renumber.py $(IMAGE_DIR) $(DATE)
 	$(FFMPEG) -r 10 -i "$(IMAGE_DIR)/$(DATE)_%05d.png" -pix_fmt yuv420p -vcodec h264 -s 1120x700 -y "worklog_$(DATE).mp4"
 clean:
 	@while [ -z "$$CONTINUE" ]; do \

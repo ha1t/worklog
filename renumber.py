@@ -1,5 +1,6 @@
 import glob
 import os
+import sys
 
 def get_target_list():
     files = glob.glob('../../screencapture/*.png')
@@ -13,12 +14,12 @@ def get_target_list():
 
     print list(set(target_list))
 
-def renumber():
-    target_date = 20140217
-    target_dir = '../../screencapture' + '/'
+def renumber(target_dir, target_date):
+    #target_date = '20140217'
+    #target_dir = '../../screencapture' + '/'
 
     target_list = []
-    for file in glob.glob('%s%d_*.png' % (target_dir, target_date)):
+    for file in glob.glob('%s%s_*.png' % (target_dir, target_date)):
         filename = os.path.basename(file)
         target_list.append(filename)
         #print file
@@ -27,11 +28,11 @@ def renumber():
     number = 1
     for filename in target_list:
         old = filename
-        new = '%d_%05d.png' % (target_date, number)
+        new = '%s_%05d.png' % (target_date, number)
         print('%s -> %s' % (old, new))
         if old != new:
             os.rename(target_dir + old, target_dir + new)
         number = number + 1
 
 #get_target_list()
-renumber()
+renumber(sys.argv[1], sys.argv[2])
