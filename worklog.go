@@ -53,6 +53,10 @@ func getCounter(r_counter int) int {
 		if err != nil {
 			log.Fatal(err)
 		}
+		// アイテムないなら最初から
+		if len(items) == 0 {
+			return r_counter
+		}
 		sort.Strings(items)
 		string_suffix := strings.Split(items[len(items)-1], "_")[1]
 		latest_number, _ := strconv.Atoi(strings.Split(string_suffix, ".")[0])
