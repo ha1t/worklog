@@ -27,9 +27,10 @@ func capture() {
 
 	if now.Day() != time.Now().Day() {
 		counter = 1
+		now = time.Now()
+	} else {
+		counter = getCounter(counter)
 	}
-
-	counter = getCounter(counter)
 
 	filename := fmt.Sprintf("%d%02d%02d_%05d.png", now.Year(), now.Month(), now.Day(), counter)
 
