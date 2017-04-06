@@ -27,15 +27,20 @@ func renumber(target_dir string, target_date string) {
 	for n, bf := range target_list {
 		num := n
 		before_filename := bf
-		after_filename := fmt.Sprintf("%s_%05d.png", target_date, num+1)
-		if before_filename != after_filename {
-			go func() {
-				fmt.Println(before_filename + " -> " + after_filename)
-				os.Rename(target_dir+before_filename, target_dir+after_filename)
-				finished <- true
-			}()
-			chan_count += 1
-		}
+		after_filename := fmt.Sprintf("%s__%05d.png", target_date, num+1)
+
+		// 並列化のジレンマについて
+		// 並列実行すると、処理順序の関係でファイルを上書きしてしまう可能性があるため
+		// 書き換え先のファイル名はかぶらないようにする必要がある。
+		// その場合、すべてのファイルをrenameするため、ずれてなければpassできた直列実行よりも遅くなる
+		//if before_filename != after_filename {
+		go func() {
+			fmt.Println(before_filename + " -> " + after_filename)
+			os.Rename(target_dir+before_filename, target_dir+after_filename)
+			finished <- true
+		}()
+		chan_count += 1
+		//}
 	}
 
 	// 終わるまで待つ
