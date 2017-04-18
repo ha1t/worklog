@@ -7,44 +7,44 @@ import (
 	"sort"
 )
 
-func renumber(target_dir string, target_date string) {
-	files, err := filepath.Glob(target_dir + target_date + "_*.png")
+func renumber(targetDir string, targetDate string) {
+	files, err := filepath.Glob(targetDir + targetDate + "_*.png")
 	if err != nil {
 		panic(err)
 	}
 
-	target_list := []string{}
+	targetList := []string{}
 	for _, file := range files {
 		basename := filepath.Base(file)
-		target_list = append(target_list, basename)
+		targetList = append(targetList, basename)
 	}
 
-	sort.Strings(target_list)
+	sort.Strings(targetList)
 
 	finished := make(chan bool)
 
-	chan_count := 0
-	for n, bf := range target_list {
+	chanCount := 0
+	for n, bf := range targetList {
 		num := n
-		before_filename := bf
-		after_filename := fmt.Sprintf("%s__%05d.png", target_date, num+1)
+		beforeFilename := bf
+		afterFilename := fmt.Sprintf("%s__%05d.png", targetDate, num+1)
 
 		// 並列化のジレンマについて
 		// 並列実行すると、処理順序の関係でファイルを上書きしてしまう可能性があるため
 		// 書き換え先のファイル名はかぶらないようにする必要がある。
 		// その場合、すべてのファイルをrenameするため、ずれてなければpassできた直列実行よりも遅くなる
-		//if before_filename != after_filename {
+		//if beforeFilename != afterFilename {
 		go func() {
-			fmt.Println(before_filename + " -> " + after_filename)
-			os.Rename(target_dir+before_filename, target_dir+after_filename)
+			fmt.Println(beforeFilename + " -> " + afterFilename)
+			os.Rename(targetDir+beforeFilename, targetDir+afterFilename)
 			finished <- true
 		}()
-		chan_count += 1
+		chanCount++
 		//}
 	}
 
 	// 終わるまで待つ
-	for i := 1; i <= chan_count; i++ {
+	for i := 1; i <= chanCount; i++ {
 		<-finished
 	}
 }
