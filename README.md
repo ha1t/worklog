@@ -6,13 +6,11 @@
 
 ```
 $ brew install ffmpeg
+$ go build renumber.go
+$ go build worklog.go
 ```
 
 # How to use
-
-```
-$ pyrhon worklog.py
-```
 
 ```
 $ make DATE=20131220 IMAGE_DIR=../../screencapture/
