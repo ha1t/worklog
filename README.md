@@ -20,3 +20,25 @@ $ make clean DATE=20131220 IMAGE_DIR=../../screencapture/
 # TODO
 - マシンがフリーズして再起動したときに自動的にスクリプトが再実行されてほしい(crontab?)
 - 二重起動防止したい
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>worklog</string>
+	<key>OnDemand</key>
+	<false/>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Users/tsuruoka-n/src/worklog/worklog</string>
+	</array>
+</dict>
+</plist>
+```
+
+launchctl load ~/Library/LaunchAgents/worklog.plist
+
+
+https://qiita.com/rsahara/items/7d37a4cb6c73329d4683
