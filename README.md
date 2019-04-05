@@ -17,9 +17,9 @@ $ make DATE=20131220 IMAGE_DIR=../../screencapture/
 $ make clean DATE=20131220 IMAGE_DIR=../../screencapture/
 ```
 
-# TODO
-- マシンがフリーズして再起動したときに自動的にスクリプトが再実行されてほしい(crontab?)
-- 二重起動防止したい
+# setup
+
+Macで使う場合、以下のような内容の worklog.plist を作り、ユーザーのLibrary/LaunchAgents/ におく。
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -32,13 +32,20 @@ $ make clean DATE=20131220 IMAGE_DIR=../../screencapture/
 	<false/>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/Users/tsuruoka-n/src/worklog/worklog</string>
+		<string>/Users/XXXXXXXXXX/src/worklog/worklog</string>
 	</array>
 </dict>
 </plist>
 ```
 
+おいたら
+
 launchctl load ~/Library/LaunchAgents/worklog.plist
 
+を実行するだけ
 
-https://qiita.com/rsahara/items/7d37a4cb6c73329d4683
+参考 : https://qiita.com/rsahara/items/7d37a4cb6c73329d4683
+
+# TODO
+- マシンがフリーズして再起動したときに自動的にスクリプトが再実行されてほしい(crontab?)
+- 二重起動防止したい
