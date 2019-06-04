@@ -47,5 +47,4 @@ launchctl load ~/Library/LaunchAgents/worklog.plist
 参考 : https://qiita.com/rsahara/items/7d37a4cb6c73329d4683
 
 # TODO
-- マシンがフリーズして再起動したときに自動的にスクリプトが再実行されてほしい(crontab?)
 - 二重起動防止したい
